@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 6A - HKDSE 2027 Countdown Hub</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 40%, #e0e7ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(255, 255, 255, 0.7);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-size: 2.2rem;
+            margin: 0 0 6px 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero Section */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3);
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .hero-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-date {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .hero-timer {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .hero-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            min-width: 75px;
+            padding: 12px 8px;
+        }
+
+        .hero-num {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fbbf24;
+            line-height: 1;
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 6px;
+            opacity: 0.9;
+        }
+
+        /* Grid Sections */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 28px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .subject-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .tag-core { background: #dbeafe; color: #1e40af; }
+        .tag-elec { background: #fef3c7; color: #92400e; }
+
+        .date-badge {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .timer-row {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(241, 245, 249, 0.7);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .time-box { flex: 1; }
+        .time-num { font-size: 1.15rem; font-weight: 800; color: #d97706; }
+        .time-label { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .info-row:last-child { border-bottom: none; }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            .hero-timer { gap: 8px; }
+            .hero-box { min-width: 55px; padding: 8px 4px; }
+            .hero-num { font-size: 1.6rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎓 Class 6A DSE 2027 Hub</h1>
+        <p style="color: var(--text-muted); margin: 0;">Stay focused, work smart, and finish strong together.</p>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-banner">
+        <div class="hero-title">🔥 Countdown to 2027 DSE First Subject</div>
+        <div class="hero-date">📅 April 6, 2027 (Tuesday) • 08:30 AM</div>
+
+        <div class="hero-timer">
+            <div class="hero-box"><div class="hero-num" id="hero-d">00</div><div class="hero-label">Days</div></div>
+            <div class="hero-box"><div class="hero-num" id="hero-h">00</div><div class="hero-label">Hours</div></div>
+            <div class="hero-box"><div class="hero-num" id="hero-m">00</div><div class="hero-label">Mins</div></div>
+            <div class="hero-box"><div class="hero-num" id="hero-s">00</div><div class="hero-label">Secs</div></div>
+        </div>
+    </div>
+
+    <!-- Core Subjects -->
+    <div class="section-title">📌 Core Subjects Countdown</div>
+    <div class="grid" id="core-grid"></div>
+
+    <!-- Electives -->
+    <div class="section-title">📘 Class 6A Electives Countdown</div>
+    <div class="grid" id="elective-grid"></div>
+
+    <!-- Practical & Speaking -->
+    <div class="section-title">🗣️ Practical & Speaking Period</div>
+    <div class="info-card">
+        <div class="info-row">
+            <span><strong>English Language Speaking (Normal)</strong></span>
+            <span style="color: var(--text-muted);">Mid-Mar – Late Mar 2027</span>
+        </div>
+        <div class="info-row">
+            <span><strong>English Language Speaking (SEN)</strong></span>
+            <span style="color: var(--text-muted);">Late Mar 2027</span>
+        </div>
+        <div class="info-row">
+            <span><strong>Physical Education (Practical)</strong></span>
+            <span style="color: var(--text-muted);">Late Feb – Late Mar 2027</span>
+        </div>
+        <div class="info-row">
+            <span><strong>Music (Practical)</strong></span>
+            <span style="color: var(--text-muted);">Early Mar – Mid-Mar 2027</span>
+        </div>
+        <div class="info-row">
+            <span><strong>Tentative Results Release</strong></span>
+            <span style="color: var(--primary); font-weight: bold;">Around July 14, 2027</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Robust date parser for all mobile OS formats (ISO 8601 with HKT offset)
+    function parseDate(isoStr) {
+        return new Date(isoStr).getTime();
+    }
+
+    const firstExamDate = parseDate("2027-04-06T08:30:00+08:00");
+
+    const coreSubjects = [
+        { name: "Chinese Language", target: parseDate("2027-04-08T08:30:00+08:00"), display: "Apr 8 (Thu)" },
+        { name: "English Language (P1 & P2)", target: parseDate("2027-04-09T08:30:00+08:00"), display: "Apr 9 (Fri)" },
+        { name: "English Language (P3)", target: parseDate("2027-04-10T08:30:00+08:00"), display: "Apr 10 (Sat)" },
+        { name: "Mathematics Compulsory", target: parseDate("2027-04-12T08:30:00+08:00"), display: "Apr 12 (Mon)" },
+        { name: "Citizenship & Social Dev", target: parseDate("2027-04-13T08:30:00+08:00"), display: "Apr 13 (Tue)" }
+    ];
+
+    const electiveSubjects = [
+        { name: "Chemistry", target: parseDate("2027-04-15T08:30:00+08:00"), display: "Apr 15 (Thu)" },
+        { name: "ICT", target: parseDate("2027-04-17T08:30:00+08:00"), display: "Apr 17 (Sat)" },
+        { name: "Biology", target: parseDate("2027-04-19T08:30:00+08:00"), display: "Apr 19 (Mon)" },
+        { name: "Design & Applied Tech", target: parseDate("2027-04-20T08:30:00+08:00"), display: "Apr 20 (Tue)" },
+        { name: "Physics", target: parseDate("2027-04-21T08:30:00+08:00"), display: "Apr 21 (Wed)" },
+        { name: "Economics", target: parseDate("2027-04-22T08:30:00+08:00"), display: "Apr 22 (Thu)" },
+        { name: "Mathematics M1 / M2", target: parseDate("2027-04-23T08:30:00+08:00"), display: "Apr 23 (Fri)" },
+        { name: "Chinese History", target: parseDate("2027-04-24T08:30:00+08:00"), display: "Apr 24 (Sat)" },
+        { name: "BAFS", target: parseDate("2027-04-26T08:30:00+08:00"), display: "Apr 26 (Mon)" },
+        { name: "History", target: parseDate("2027-04-27T08:30:00+08:00"), display: "Apr 27 (Tue)" },
+        { name: "Tourism & Hospitality", target: parseDate("2027-04-28T08:30:00+08:00"), display: "Apr 28 (Wed)" }
+    ];
+
+    function createGrid(list, containerId, isCore) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        list.forEach((sub, idx) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            const cardId = `${containerId}-${idx}`;
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="subject-title">${sub.name}</span>
+                    <span class="tag ${isCore ? 'tag-core' : 'tag-elec'}">${isCore ? 'Core' : 'Elective'}</span>
+                </div>
+                <div class="date-badge">📅 ${sub.display}</div>
+                <div class="timer-row" id="${cardId}">
+                    <div class="time-box"><div class="time-num d">0</div><div class="time-label">Days</div></div>
+                    <div class="time-box"><div class="time-num h">00</div><div class="time-label">Hrs</div></div>
+                    <div class="time-box"><div class="time-num m">00</div><div class="time-label">Min</div></div>
+                    <div class="time-box"><div class="time-num s">00</div><div class="time-label">Sec</div></div>
+                </div>
+            `;
+            container.appendChild(card);
+            sub.elementId = cardId;
+        });
+    }
+
+    function updateHeroTimer() {
+        const now = Date.now();
+        const diff = firstExamDate - now;
+
+        if (isNaN(diff) || diff <= 0) {
+            document.getElementById('hero-d').innerText = "0";
+            document.getElementById('hero-h').innerText = "00";
+            document.getElementById('hero-m').innerText = "00";
+            document.getElementById('hero-s').innerText = "00";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('hero-d').innerText = days;
+        document.getElementById('hero-h').innerText = String(hours).padStart(2, '0');
+        document.getElementById('hero-m').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('hero-s').innerText = String(seconds).padStart(2, '0');
+    }
+
+    function updateGridTimers(list) {
+        const now = Date.now();
+        list.forEach(sub => {
+            const diff = sub.target - now;
+            const container = document.getElementById(sub.elementId);
+
+            if (!container || isNaN(diff)) return;
+
+            if (diff <= 0) {
+                container.querySelector('.d').innerText = "0";
+                container.querySelector('.h').innerText = "00";
+                container.querySelector('.m').innerText = "00";
+                container.querySelector('.s').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            container.querySelector('.d').innerText = days;
+            container.querySelector('.h').innerText = String(hours).padStart(2, '0');
+            container.querySelector('.m').innerText = String(minutes).padStart(2, '0');
+            container.querySelector('.s').innerText = String(seconds).padStart(2, '0');
+        });
+    }
+
+    // Execute card creation after DOM elements exist
+    document.addEventListener("DOMContentLoaded", function() {
+        createGrid(coreSubjects, 'core-grid', true);
+        createGrid(electiveSubjects, 'elective-grid', false);
+
+        function tick() {
+            updateHeroTimer();
+            updateGridTimers(coreSubjects);
+            updateGridTimers(electiveSubjects);
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    });
+</script>
+
+</body>
+</html>
